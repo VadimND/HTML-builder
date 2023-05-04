@@ -27,3 +27,8 @@ rl.question('What do you think of Node.js? ', (answer) => {
         rl.close();   
     }
 });
+
+rl.on('SIGINT', () => {
+    console.log(`Bye-bye!`);
+    rl.close();
+})
