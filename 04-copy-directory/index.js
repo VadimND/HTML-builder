@@ -23,11 +23,8 @@ try {
         if (err)
             console.log(err);
         else {
-
             files.forEach(file => {
-                //if (file.isFile()) {
                 copyFile(srcPath + '/' + file, destPath + '/' + file);
-                // }
             })
         }
     });
