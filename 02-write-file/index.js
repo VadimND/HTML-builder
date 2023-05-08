@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname, './text123.txt');
+const filePath = path.join(__dirname, './text.txt');
 
 const readline = require('readline');
 const {
@@ -15,7 +15,7 @@ const rl = readline.createInterface({ input, output });
 rl.question('What do you think of Node.js? ', (answer) => {
     if (answer == "exit" || answer == '') {
         console.log(
-            `Bye?`
+            `Bye`
         );
         rl.close();
     }
@@ -23,8 +23,8 @@ rl.question('What do you think of Node.js? ', (answer) => {
         writeableStream.write(answer);
         console.log(
             `Thank you for your valuable feedback: ${answer}`
-        );    
-        rl.close();   
+        );
+        rl.close();
     }
 });
 
