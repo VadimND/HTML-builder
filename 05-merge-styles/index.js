@@ -9,7 +9,6 @@ fs.readdir(srcPath, {
     if (err)
         console.log(err);
     else {
-
         fs.stat(path.join(destPath, 'bundle.css'), function(err, stat) {
             if(err == null) {
                 fs.unlink(path.join(destPath, 'bundle.css'), (err) => {
@@ -22,7 +21,7 @@ fs.readdir(srcPath, {
                 try {
                     fs.readFile(srcPath + '/' + file.name, { encoding: 'utf-8' }, function (err, data) {
                         if (!err) {
-                            fs.appendFileSync(destPath + 'bundle.css', data, function (err) {
+                            fs.appendFile(destPath + 'bundle.css', data, function (err) {
                                 if (err) throw err;
                             });
                         } else {
