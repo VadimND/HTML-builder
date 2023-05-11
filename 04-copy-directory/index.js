@@ -6,19 +6,19 @@ const {
 const path = require('path');
 const srcPath = path.join(__dirname, './files/');
 const destPath = path.join(__dirname, './files-copy/');
+
+fs.rm(destPath, {recursive: true}, (err) => {
+    fs.mkdir(destPath, {recursive: true}, (err) => {
+      if (err) {
+        throw err;
+      } else {
+        console.log('Папка успешно создана');
+        copyDir();
+      }
+    });
+  }); 
+
 function copyDir() {
-try {
-    const createDir = mkdir(destPath, {
-        recursive: true
-    });
-    fs.readdir(destPath, (err, files) => {
-        if (err) throw err;
-        for (const file of files) {
-            fs.unlink(path.join(destPath, file), (err) => {
-                if (err) throw err;
-            });
-        }
-    });
     fs.readdir(srcPath, (err, files) => {
         if (err)
             console.log(err);
@@ -27,9 +27,5 @@ try {
                 copyFile(srcPath + '/' + file, destPath + '/' + file);
             })
         }
-    });
-
-} catch (err) {
-    console.error(err.message);
-}};
-copyDir();
+    })
+}

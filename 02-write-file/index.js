@@ -1,34 +1,22 @@
 const fs = require('fs');
 const path = require('path');
-const filePath = path.join(__dirname, './text.txt');
 
-const readline = require('readline');
-const {
-    stdin: input,
-    stdout: output,
-} = require('process');
+const { stdout, stdin } = process;
 
-let writeableStream = fs.createWriteStream(filePath);
+const output = fs.createWriteStream(path.join(__dirname, 'text.txt'));
 
-const rl = readline.createInterface({ input, output });
+stdout.write('What do you think of Node.js?\n');
 
-rl.question('What do you think of Node.js? ', (answer) => {
-    if (answer == "exit" || answer == '') {
-        console.log(
-            `Bye`
-        );
-        rl.close();
-    }
-    else {
-        writeableStream.write(answer);
-        console.log(
-            `Thank you for your valuable feedback: ${answer}`
-        );
-        rl.close();
-    }
+stdin.on('data', data => {
+  if (data.toString().trim() === 'exit'){
+    exitInfo();
+  }
+  output.write(data);
 });
 
-rl.on('SIGINT', () => {
-    console.log(`Bye-bye!`);
-    rl.close();
-})
+process.on('SIGINT', exitInfo);
+
+function exitInfo(){
+  stdout.write('Bye!');
+  process.exit();
+}

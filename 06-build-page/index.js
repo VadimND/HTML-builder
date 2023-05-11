@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const root = __dirname;
 const copyroot = path.join(root, '.\\project-dist');
-
+console.log(path.resolve(__dirname, './test', '/second.html'));
 async function emptyDir(folder) {
     let files = [];
     try {
